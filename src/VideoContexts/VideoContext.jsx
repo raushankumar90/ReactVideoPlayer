@@ -1,7 +1,7 @@
 import { createContext } from "react";
 const videoProps = {
     autoplay:false,
-    contros:true,
+    controls:true,
     src:"string",
     height:400,
     width:300,
@@ -21,6 +21,15 @@ const videoProps = {
     setPlaying:()=>{},
     setMute:()=>{},
     setCurrentVideoDuration:()=>{},
-    setSrc:()=>{}
+    setSrc:()=>{},
+    lastWatched:[],
+    setlastWatched:()=>{},
+    currentVideoTitle:"",
+    setCurrentVideoTitle:()=>{},
+    playbackRate:1,
+    setPlaybackRate:()=>{},
+    containerRef:null,
+    isFullScreen:false,
+    setFullScreen:()=>{},
 }
 export const VideoContext = createContext(videoProps)

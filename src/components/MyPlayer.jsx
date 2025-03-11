@@ -3,7 +3,7 @@ import { useVideoProps } from "../VideoContexts/VideoProvider";
 import ReactPlayer from "react-player";
 import Controls from "./Controls";
 import SearchVideo from "./SearchVideo";
-function MyPlayer() {
+const  MyPlayer=({seekTime,setSeekTime})=> {
   const {
     mute,
     videoRef,
@@ -17,36 +17,47 @@ function MyPlayer() {
     setCurrentTime,
     currentTime,
     setCurrentVideoDuration,
-    volume
+    volume,
+    controls,
+    playbackRate,
+    containerRef,
+    isFullScreen,
+    setFullScreen
   } = useVideoProps();
 
-
   return (
-    <div className="p-3 w-120">
-      <SearchVideo></SearchVideo>
+    <div className="p-3 relative">
+      <SearchVideo setSeekTime={setSeekTime}></SearchVideo>
+      <div ref={containerRef} className="relative">
       <ReactPlayer
+        controls={controls}
         ref={videoRef}
-        width={"auto"}
+        width={"100%"}
         onDuration={(total) => {
           setCurrentVideoDuration(() => total);
         }}
         playing={playing}
-        height={height}
+        height={isFullScreen?"100vh":height}
         url={src}
         muted={mute}
-        onProgress={(e)=>setCurrentTime(e.playedSeconds)}
+        playsinline={true}
+        onProgress={(e) => setCurrentTime(e.playedSeconds)}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
-        onEnded={()=>setPlaying(false)}
+        onEnded={() => setPlaying(false)}
         volume={volume}
+        onSeek={(e) => setCurrentTime(e)}
+        onReady={() => { 
+          videoRef.current.seekTo(seekTime,"seconds")
+          console.log("Phle mai aagya myplayer se",seekTime);
+          setPlaying(true); }}
+        playbackRate={playbackRate}
       />
+      <div className="w-full  controls">
+         
       <Controls />
-      <div>
-        Total-{currentVideoDuration} Current
-        {currentTime}
       </div>
-      <button onClick={() => setPlaying((prev) => !prev)}>PlayPause</button>
-      {playing ? "playing" : "stop"}
+      </div>
     </div>
   );
 }
