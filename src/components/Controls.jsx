@@ -1,5 +1,5 @@
 import { useVideoProps } from "../VideoContexts/VideoProvider";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 function Controls() {
   const forwardRef = useRef(null);
   const backwardRef = useRef(null);
@@ -18,19 +18,30 @@ function Controls() {
     setPlaybackRate,
     isFullScreen,
     setFullScreen,
-    setControls,
-    containerRef
+    // setControls,
+    containerRef,
+    src
   } = useVideoProps(); 
-  const checkFullScreen = () => {
+  const checkFullScreen = useCallback(() => {
     setFullScreen(!!document.fullscreenElement);
-  }
-  const handleFullScreen = () => {
+  },[])
+  const handleFullScreen = useCallback(() => {
     if(isFullScreen){
       document.exitFullscreen()
     }else{
       containerRef.current.requestFullscreen()
     }
-  }
+  },[isFullScreen,containerRef])
+
+  // const handlePip = () => {
+  //   if(videoRef.current){
+  //     console.log(videoRef.current.getInternalPlayer());
+      
+  //     // videoRef.current.getInternalPlayer().requestPictureInPicture()
+  //     window.open(src,"_blank","width=500,height=350")
+  //     setPlaying(false)
+  //   }
+  // }
   useEffect(()=>{
     document.addEventListener("fullscreenchange",checkFullScreen)
     return ()=>{ document.removeEventListener("fullscreenchange",checkFullScreen)}
@@ -96,6 +107,7 @@ function Controls() {
         {`${(totalHours<1)?'':totalHours+':'}`}{totalMinutes}:{totalSeconds}
         </span>
       </div>
+      {/* <div className="pip"><button onClick={handlePip}>PiP Mode</button></div> */}
       <div className="playratecontrol w-auto justify-self-end col-span-1 pt-1">
           <select className="p-1 outline-none bg-white rounded" value={playbackRate} onChange={(e)=>setPlaybackRate(Number(e.target.value))}>
             <option value={0.5}>0.5x</option>

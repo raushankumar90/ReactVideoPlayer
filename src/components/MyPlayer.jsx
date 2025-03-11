@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+// import { useEffect, useRef } from "react";
 import { useVideoProps } from "../VideoContexts/VideoProvider";
 import ReactPlayer from "react-player";
 import Controls from "./Controls";
@@ -12,17 +12,17 @@ const  MyPlayer=({seekTime,setSeekTime})=> {
     width,
     height,
     playing,
-    currentVideoDuration,
+    // currentVideoDuration,
     // updateCurrentTime,
     setCurrentTime,
-    currentTime,
+    // currentTime,
     setCurrentVideoDuration,
     volume,
     controls,
     playbackRate,
     containerRef,
     isFullScreen,
-    setFullScreen
+    // setFullScreen
   } = useVideoProps();
 
   return (
@@ -52,6 +52,7 @@ const  MyPlayer=({seekTime,setSeekTime})=> {
           console.log("Phle mai aagya myplayer se",seekTime);
           setPlaying(true); }}
         playbackRate={playbackRate}
+        pip={true}
       />
       <div className="w-full  controls">
          

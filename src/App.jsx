@@ -9,6 +9,7 @@ import { useSearch } from "./VideoContexts/SearchContext";
 import "animate.css";
 function App() {
   const [seekTime, setSeekTime] = useState(0);
+  const [isOnline,setIsOnline] =useState(navigator.onLine)
   const {
     playing,
     setSrc,
@@ -23,9 +24,18 @@ function App() {
 
   //to check if the user is offline
   useEffect(() => {
-    const handleOffline = () => {
-      alert("You are now Offline");
-    };
+     const onLineHandler = () => {
+      setIsOnline(true)
+     }
+     const offlineHandler = () => {
+      setIsOnline(false)
+     }
+    window.addEventListener('online',onLineHandler)
+    window.addEventListener('offline',offlineHandler)
+    return ()=>{
+      removeEventListener('online',onLineHandler)
+      removeEventListener('offline',offlineHandler)
+    }
   }, []);
 
 // to get the last played video and set it to the videos state
@@ -75,9 +85,9 @@ useEffect(() => {
   }, []);
 
   //new useEffect
-  useEffect(() => {
-    watchedRef.current = currentTime;
-  }, [currentTime]);
+  // useEffect(() => {
+  //   watchedRef.current = currentTime;
+  // }, [currentTime]);
 
   //to save the last played video in the local storage
   useEffect(() => {
@@ -118,8 +128,9 @@ useEffect(() => {
       }
     };
   }, [playing, currentVideoTitle, src]);
-  return (
-    <div className="bg-gray-950">
+  if(isOnline){
+    return (
+      <div className="bg-gray-950">
       <div className="">
         <NavBar />
       </div>
@@ -147,7 +158,15 @@ useEffect(() => {
         </div>
       </div>
     </div>
-  );
+    )
+  }else{
+    return (
+     <div className="bg-gray-700 w-screen text-white h-screen text-center">
+      <div className="text-center pt-40 align-self-center ">Please Check Your Internet Connection</div>
+  
+     </div>
+    )
+  }
 }
 
 export default App;

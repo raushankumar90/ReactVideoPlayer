@@ -41,7 +41,7 @@ export function HistoryVideos({ title, url, id, index,watchedTime,setSeekTime })
   const { videos, setVideo } = useSearch();
   const { playing, src, setSrc, setPlaying, setCurrentVideoTitle,videoRef} =
     useVideoProps();
-  const timeOutRef = useRef(false);
+  const timeOutRef = useRef(null);
   const handlePlay = async () => {
     if (src === url) {
       setPlaying((prev) => !prev);
@@ -58,7 +58,7 @@ export function HistoryVideos({ title, url, id, index,watchedTime,setSeekTime })
       });
       setSeekTime(()=>{
         
-        console.log("Phle mai aagya history se")
+        // console.log("Phle mai aagya history se")
         return watchedTime
       });
     }
