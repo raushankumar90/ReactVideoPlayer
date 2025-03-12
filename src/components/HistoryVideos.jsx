@@ -75,7 +75,7 @@ export function HistoryVideos({ title, url, id, index,watchedTime,setSeekTime })
       setSeekTime(newVideo.watchedTime);
       localStorage.removeItem('lastplayed')
     }else{
-      let url ="https://youtu.be/Q7HjxOAU5Kc?si=bh5isSz53_EXjNOG"
+      let url ="https://youtu.be/83RUhxsfLWs?si=0VE6gLQT0Vdu2Zab"
       setSrc(()=>url);
       setCurrentVideoTitle("Copyright Free Music");
       setSeekTime(0)

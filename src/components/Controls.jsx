@@ -188,6 +188,7 @@ function Controls() {
           value={volume}
           onChange={(e) => {
             setVolume(Number(e.currentTarget.value));
+            localStorage.setItem('volume',e.currentTarget.value)
           }}
           />
         </div>

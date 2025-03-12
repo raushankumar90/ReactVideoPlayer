@@ -18,6 +18,7 @@ function App() {
     setCurrentVideoTitle,
     src,
     videoRef,
+    setVolume
   } = useVideoProps();
   const watchedRef = useRef(currentTime);
   const { videos, getYoutubeTitle, getYoutubeId,setVideo } = useSearch();
@@ -45,6 +46,10 @@ useEffect(() => {
       // console.log("store",store);
       setVideo(() => JSON.parse(store));
       // console.log("videos ar set now",videos); //empty as the setVideo is async
+    }
+    const volume = localStorage.getItem('volume')
+    if(volume){
+      setVolume(Number(volume))
     }
   }, []);
 

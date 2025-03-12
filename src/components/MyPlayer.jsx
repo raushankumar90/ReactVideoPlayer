@@ -52,7 +52,14 @@ const  MyPlayer=({seekTime,setSeekTime})=> {
           // console.log("Phle mai aagya myplayer se",seekTime);
           if(!playing)setPlaying(true); }}
         playbackRate={playbackRate}
-        pip={true}
+        // pip={true}
+        config={
+          {
+            youtube: {
+              playerVars: { modestbranding:1,rel:0,autoplay:1}
+            },
+          }
+        }
       />
       <div className="w-full  controls">
          
