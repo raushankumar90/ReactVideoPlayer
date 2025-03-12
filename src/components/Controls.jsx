@@ -51,7 +51,7 @@ function Controls() {
   useEffect(() => {
     const pause = () => {
       if (document.hidden) {
-        console.log("Paused");
+        // console.log("Paused");
         setPlaying(() => false);
       }
     };
@@ -104,7 +104,7 @@ function Controls() {
         {`${(minutes<10)?'0'+minutes:minutes}`}:{(seconds<10)?'0'+seconds:seconds}/
         </span>
         <span>
-        {`${(totalHours<1)?'':totalHours+':'}`}{totalMinutes}:{totalSeconds}
+        {`${(totalHours<1)?'':totalHours+':'}`}{totalMinutes<10?'0'+totalMinutes:totalMinutes}:{totalSeconds<10?'0'+totalSeconds:totalSeconds}
         </span>
       </div>
       {/* <div className="pip"><button onClick={handlePip}>PiP Mode</button></div> */}

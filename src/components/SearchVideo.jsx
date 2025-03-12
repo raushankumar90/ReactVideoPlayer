@@ -37,7 +37,7 @@ function SearchVideo({setSeekTime}) {
             </div>
             <div className="col-span-1 w-full justify-self-center ">
                 <button onClick={handleSearch} className="p-3 w-full bg-gray-700 border border-solid border-white text-white cursor-pointer">
-                <i className="bi bi-search"></i> <span>Search</span>
+                {/* <i className="bi bi-search"></i> */} <span className="">SEARCH</span>
                 </button>
             </div>
         </div>

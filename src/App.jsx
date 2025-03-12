@@ -38,11 +38,11 @@ function App() {
     }
   }, []);
 
-// to get the last played video and set it to the videos state
+// to get the last played videos list and set it to the videos state
 useEffect(() => {
     const store = localStorage.getItem("videos");
     if(store){
-      console.log("store",store);
+      // console.log("store",store);
       setVideo(() => JSON.parse(store));
       // console.log("videos ar set now",videos); //empty as the setVideo is async
     }
@@ -68,7 +68,7 @@ useEffect(() => {
       })
     } else {
       let title;
-      let url = "https://youtu.be/eM8Mjuq4MwQ?si=Gcwi9QFdR0b2ZYpt";
+      let url = "https://youtu.be/83RUhxsfLWs?si=wxDHnWIhgmODHnxb";
       const videoTitle = async () => {
         title = await getYoutubeTitle(url);
         setCurrentVideoTitle(title);
@@ -108,7 +108,7 @@ useEffect(() => {
           ])
         );
         let modifiedVideos = savedVideos?.map((video) => { 
-          console.log("I am inside the map function")
+          // console.log("I am inside the map function")
           return (video.id === getYoutubeId(src))?{...video,watchedTime:videoRef.current.getCurrentTime()}:video
         })
         
@@ -118,7 +118,7 @@ useEffect(() => {
             modifiedVideos
           )
         )
-        console.log("videos",modifiedVideos);
+        // console.log("videos",modifiedVideos);
         setVideo(modifiedVideos)
       }, 2000);
     }
@@ -138,7 +138,7 @@ useEffect(() => {
         <div className="">
           <MyPlayer seekTime={seekTime} setSeekTime={setSeekTime} />
         </div>
-        <div className="history w-auto">
+        <div className="history w-auto pb-3">
           <div className="head text-center text-white p-3 bg-gray-900 m-2 rounded">
             <h1>Previously Watched Video</h1>
           </div>

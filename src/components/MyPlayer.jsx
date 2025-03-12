@@ -24,12 +24,12 @@ const  MyPlayer=({seekTime,setSeekTime})=> {
     isFullScreen,
     // setFullScreen
   } = useVideoProps();
-
   return (
     <div className="p-3 relative">
       <SearchVideo setSeekTime={setSeekTime}></SearchVideo>
       <div ref={containerRef} className="relative">
       <ReactPlayer
+        wrapper={'div'}
         controls={controls}
         ref={videoRef}
         width={"100%"}
@@ -49,8 +49,8 @@ const  MyPlayer=({seekTime,setSeekTime})=> {
         onSeek={(e) => setCurrentTime(e)}
         onReady={() => { 
           videoRef.current.seekTo(seekTime,"seconds")
-          console.log("Phle mai aagya myplayer se",seekTime);
-          setPlaying(true); }}
+          // console.log("Phle mai aagya myplayer se",seekTime);
+          if(!playing)setPlaying(true); }}
         playbackRate={playbackRate}
         pip={true}
       />
